@@ -1,0 +1,6 @@
+azure-ai-ml
+azure-ml
+langchain
+langchain-community
+python-dotenv
+streamlit
