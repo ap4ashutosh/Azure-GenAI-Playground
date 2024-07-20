@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from azure.ai.ml import MLClient
 from azure.identity import DefaultAzureCredential
  
@@ -7,7 +7,7 @@ from langchain_community.chat_models.azureml_endpoint import AzureMLChatOnlineEn
 from langchain_core.messages import HumanMessage
 
 # Load environment variables from .env file
-load_dotenv(dotenv_path="project1\chat\.env")
+load_dotenv(find_dotenv())
 
 # Fetch values from environment variables
 subscription_id = os.getenv("subscription_id")
@@ -27,7 +27,7 @@ ml_client = MLClient(
 from langchain_core.messages import HumanMessage
 
 llm = AzureMLChatOnlineEndpoint(endpoint_url=url, 
-                                 deployment_name="Meta-Llama-3-8B-Instruct-mybot", 
+                                 deployment_name="Meta-Llama-3-70B-Instruct-vkrgw", 
                                  endpoint_api_type=AzureMLEndpointApiType.serverless, 
                                  endpoint_api_key=api,
                                  content_formatter=CustomOpenAIChatContentFormatter())
@@ -37,5 +37,5 @@ input_text = input("Enter a text needs to be completed: ")
 response = llm.invoke([HumanMessage(input_text)])
 print(response)
 
-# print(f"URL: {url}")
-# print(f"API Key: {api}")  # Be cautious about printing API keys in production
+
+# print(api)
