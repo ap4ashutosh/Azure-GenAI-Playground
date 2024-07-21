@@ -1,0 +1,10 @@
+azure-ai-ml
+azure-ml
+langchain
+langchain-community
+python-dotenv
+streamlit
+pyPDF2
+tiktoken
+faiss-cpu
+sentence-transformers
