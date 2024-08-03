@@ -35,11 +35,11 @@ def llama_chatbot():
     """
     llm = AzureMLChatOnlineEndpoint(
         endpoint_url=endpoint_url,
-        deployment_name="Meta-Llama-3-70B-Instruct-proj", 
+        deployment_name="Meta-Llama-3-70B-Instruct-vkrgw", 
         endpoint_api_type=AzureMLEndpointApiType.serverless, 
         endpoint_api_key=endpoint_api_key,
         content_formatter=CustomOpenAIChatContentFormatter(),
-        model_kwargs={"temperature": 0.8, "max_tokens": 2048, "top_p": 0.95}
+        model_kwargs={"temperature": 0.45, "max_tokens": 2048, "top_p": 0.95}
     )
     return llm
 
@@ -62,7 +62,7 @@ def prepare_docs(pdf_docs):
         metadata.append({
             "title": doc["title"]
         })
-    print("Content and metadata are extracted from the documents")
+    # print("Content and metadata are extracted from the documents")
     return content, metadata
 
 def get_text_chunks(content, metadata):
@@ -71,7 +71,7 @@ def get_text_chunks(content, metadata):
     """
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         chunk_size=512,
-        chunk_overlap=256,
+        chunk_overlap=100,
     )
     split_docs = text_splitter.create_documents(content, metadatas=metadata)
     print(f"Documents are split into {len(split_docs)} passages")
@@ -120,7 +120,7 @@ def get_conversation_chain(vectordb):
         memory=memory,
         return_source_documents=True
     )
-    print("Conversational Chain created for the LLM using the vector store")
+    # print("Conversational Chain created for the LLM using the vector store")
     return conversation_chain
 
 # print(llama_chatbot().invoke("What is the capital of France?"))
